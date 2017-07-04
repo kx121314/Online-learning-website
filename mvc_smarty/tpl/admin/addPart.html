@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>添加小节</title>
+ 	<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css" media="screen">
+		body{
+			margin: 0 20px;
+		}
+
+		h3{
+			color: red;
+			font-size: 30px;
+		}
+		input{
+			height: 28px;
+ 			width: 250px;
+		}
+		select{
+			height: 35px;
+			width: 100px;
+		}
+	</style>
+
+ 	<script type="text/javascript">
+ 	
+
+ 	$(document).ready(function(){
+ 		$("#selectFileBtn").click(function(){
+	 		$fileup=$('<input type="file" name="files[]">');
+	 		$fileup.hide();
+	 		$('#attachList').append($fileup);
+	 		$fileup.trigger('click');
+	 		$fileup.change(function(){
+	 			$path=$(this).val();
+	 			$fileName=$path.substring($path.lastIndexOf('\\')+1);
+	 			$attachItem=$('<div id="attachItem"><div id="attachLeft"></div><div id="attachRight"><a href="javascript:void(0)" title="删除附件">删除</a></div></div>');
+	 			$attachItem.find('#attachLeft').html($fileName);
+	 			$('#attachList').append($attachItem);
+
+
+	 			$("#attachList>#attachItem").on('click','a',function(){
+	 			$(this).parents('#attachItem').prev('input').remove();
+        		$(this).parents('#attachItem').remove();
+	 			})
+	 		})
+	 	})
+ 	})
+
+
+ 	</script>
+ </head>
+ <body>
+ 	<h3 class="h3">添加小节</h3>
+ 	<form action="admin.php?controller=admin&method=addPart" method="post" enctype="multipart/form-data">
+ 		<table width="70%" border="1" cellpadding="5" cellspacing="0" bgcolor="#ccc">
+
+ 			<tr>
+				<td align="right"><label for="part_name">小节名称</label></td>
+				<td><input type="text" name="part_name" required="required "  value="{$data[0]['part_name']|default:''}"></td>
+			</tr>	
+			<tr>
+				<td align="right">所属章</td>
+				<td>
+					{$info[0]['chapter_name']}
+					<input type="hidden" name="chid" value="{$info[0]['id']}">
+				</td>
+			</tr>
+			<tr>
+ 			    <td align="right">小节内容</td>
+ 			    <td><textarea name="content" style="width: 98%;height: 150px;">{$data[0]['content']|default:''}</textarea></td>
+ 			</tr>
+ 			<tr>
+				<td align="right">小节视频</td>
+				<td>
+					<a href="javascript:void(0)" id="selectFileBtn">添加附件</a>
+					<div id="attachList" class="clear"></div>
+				</td>
+			</tr>
+			<tr align="center">
+				<td colspan="2">
+					<input type="hidden" name="id" value="{$data[0]['id']|default:''}">
+					<input type="submit" value="提交">
+				</td>			
+			</tr>
+ 		</table>
+ 	</form>
+ </body>
+ </html>

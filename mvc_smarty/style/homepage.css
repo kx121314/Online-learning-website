@@ -1,0 +1,142 @@
+.home_main{
+	width: 100%;
+}
+.home_main a{
+	color: #000;}
+.user_header{
+	width: 80%;
+	margin: 0 auto;
+	background-color: #fff;
+}
+.user_img{
+	width: 120px;
+	height: 120px;
+	float: left;
+	border-radius: 60px;
+	margin: 15px 30px;
+	overflow: hidden;
+}
+.user_header h3{
+	margin-top: 50px;
+	float: left;
+}
+.user_header span{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: 55px 0 0 15px;
+
+}
+.user_header p{
+	margin: 10px;
+	text-indent:20px;
+}
+
+.user_info{
+	width: 80%;
+	margin: 20px auto 0;
+	background-color: #fff;
+}
+.user_info .user_menu{
+	width: 20%;
+	height: 140px;
+	float: left;
+}
+.user_info .user_menu li{
+	width: 100%;
+	height: 70px;
+}
+
+.user_info .user_menu span{
+	line-height: 69px;
+	display: inline-block;
+	width: 60%;
+	margin-left: 10%;
+	border-bottom: 1px solid #606060;
+	background:url(../img/icon/right.png) center right no-repeat,
+				url(../img/icon/article.png) center left no-repeat;
+	padding-left: 20%;
+}
+.user_menu li:first-child span{
+	background:url(../img/icon/right.png) center right no-repeat,
+				url(../img/icon/course.png) center left no-repeat;
+}
+.user_info .user_study{
+	width: 78%;
+	margin-left: 2%;
+	float: left;
+}
+
+.one_couser{
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	position: relative;
+
+}
+.one_couser .study_time{
+	display: inline-block;
+	margin-top: 70px;
+	float: left;
+	width: 10%;
+	text-align: center;
+	color: rgb(46,51,63);
+}
+.one_couser .study_time .year{
+	display: block;
+	font: 18px/25px "微软雅黑"
+}
+.one_couser .couser_ed{
+	width: 90%;
+	float: left;
+}
+.one_couser .couser_ed img{
+	width: 25%;
+	height: 130px;
+	margin: 35px 20px 0;
+	float: left;
+}
+.one_couser .couser_ed .couser_info{
+	width: 69%;
+	height: 200px;
+	float: left;
+}
+.couser_ed .couser_info .h3_outer{
+	float: left;
+	width: 80%;
+}
+.couser_info .h3_outer h3{
+	margin: 60px 0 10px;
+}
+.couser_ed .couser_info .continue_study{
+	height: 200px;
+	float: right;
+	width: 20%;
+	text-align: center;
+	line-height: 200px;
+}
+.continue_study span{
+	border: 1px solid red;
+	padding: 6px;
+	color: red;
+	border-radius: 8px;
+}
+.continue_study span:hover{
+	background-color: red;
+	color: #fff;
+}
+.couser_delete{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 10px;
+	right: 10px;
+	background: url(../img/icon/delete_black.png) left top no-repeat;
+
+}
+.couser_delete a{
+	display: block;
+	height: 25px;
+}
+.couser_delete:hover{
+	background: url(../img/icon/delete_red.png) left top no-repeat;
+}

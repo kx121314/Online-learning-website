@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>章节</title>
+</head>
+<style type="text/css" media="screen">
+*{
+	margin:0;
+	padding: 0;
+}
+a{
+	text-decoration: none;
+}
+li{
+	list-style: none;
+}
+h3{
+	margin: 20px 30px 0;
+}
+.cou_outer{
+	width: 80%;
+	margin: 0 auto;
+	border-bottom: 1px solid #ccc;
+	padding: 5px 0;
+}
+.cou_outer h4{
+	color: #000;
+	line-height: 40px;
+	float: left;
+}
+.cou_outer #updatez{
+	line-height: 40px;
+	margin-left: 60px;
+}
+.chapter{
+	width: 90%;
+	margin: 0 auto;
+	clear: both;
+}
+.chapter li{
+	background-color: #F3F5F7;
+	line-height: 35px;
+	margin: 3px;
+	padding: 0 10px;
+	width: 96%;
+}
+.chapter a{
+	float: right;
+	margin-right: 20px;
+	color: #4D555D; 
+	display: inline-block;
+	padding: 0 2%;
+	position: relative;
+	
+}
+.chapter a:hover{
+	background-color: #fff;
+}
+.chapter a input{
+	position: absolute;
+	font-size: 25px;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	z-index: 10px;
+}
+.addj{
+	display: block;
+	width: 60px;
+	height: 30px;
+	margin: 10px 50px 0;
+	background-color: #ccc;
+	text-align: center;
+	line-height: 30px;
+}
+.addz{
+	display: block;
+	width: 60px;
+	height: 30px;
+	margin: 20px 120px 0;
+	background-color: #ccc;
+	text-align: center;
+	line-height: 30px;
+}
+</style>
+<!-- <script type="text/javascript">
+	window.onload=function(){
+		var a_on=document.getElementById('a_on');
+		a_on.onmouseout=function(){
+			var input_on=document.getElementById('input_on');
+			if (input_on.value) {
+				a_on.innerHTML=input_on.value+'<input type="file" name="" value="" placeholder="" id="input_on">';
+			}
+		}
+	}
+</script> -->
+<body>
+	<h3>{$cour[0]['course_name']}</h3>
+	{if $data neq ''}
+	{foreach $data as $key}
+	<div class="cou_outer">
+		<h4>{$key['chapter_name']}</h4><a href="admin.php?controller=admin&method=editChapter&id={$key['id']}" title="" id="updatez">修改</a> || <a href="admin.php?controller=admin&method=delChapter&id={$key['id']}" title="">删除</a>
+		<div class="chapter">
+			<ul>
+			{foreach $parts_i as $part_i}
+			{if $part_i['chid'] eq $key['id']}
+				<li>{$part_i['part_name']}
+
+					<!-- <a href="#" title="" id="a_on">更改视频<input type="file" name="" value="" placeholder="" id="input_on"></a> -->
+					<a href="admin.php?controller=admin&method=delPart&id={$part_i['id']}" title="">删除</a>
+					<a href="admin.php?controller=admin&method=editPart&id={$part_i['id']}" title="">修改</a>
+					<a href="admin.php?controller=admin&method=messages&id={$part_i['id']}" title="">评论</a>
+				</li>
+			{/if}
+			{/foreach}
+			</ul>
+		</div>
+		<a href="admin.php?controller=admin&method=addPart&id={$key['id']}" title="" class="addj">添加节</a>
+	</div>
+	{/foreach}
+	{/if}
+	<a href="admin.php?controller=admin&method=addChapter&id={$cou_id['id']}" title="" class="addz">添加章</a>
+</body>
+</html>

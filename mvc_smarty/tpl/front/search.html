@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全站搜索</title>
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+	<link rel="stylesheet" type="text/css" href="style/index.css">
+	<link rel="stylesheet" type="text/css" href="style/course_list.css">
+	<style type="text/css" media="screen">
+		.search_res{
+			width: 150px;
+			margin:20px auto;
+		}
+		.search_res h4{
+			color: #000;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<header id="index_header">
+		<h2><a href="index.php" title="">在线学习网</a></h2>
+		<nav>
+			<ul class="clearfix">
+				<li><a href="index.php?controller=index&method=course_list" title="" class="active">课程</a></li>
+				<li><a href="index.php?controller=index&method=article_list" title="">文章</a></li>
+				<li><a href="" title=""></a></li>
+			</ul>
+		</nav>
+		<div class="nav_right">
+			<div class="inputout">
+			<form action="index.php?controller=index&method=searchAll" method="post" accept-charset="utf-8">
+				<input type="search" name="search" value="" placeholder="搜索全站">
+				<span><input type="submit" name="" value=""></span>
+			</form>
+			</div>
+			{if $userName neq ''}
+			<span><a href="index.php?controller=index&method=homepage&id={$userId}" title="">{$userName}</a></span><a href="index.php?controller=index&method=logout" title="">退出</a>
+			{else}
+			<span><a href="index.php?controller=index&method=login" title="">登录/注册</a></span>
+			{/if}
+		</div>
+	</header><!-- /header -->
+	<div class="search_res">
+		<h4>共搜索到{$num[0]}门课程</h4>
+	</div>
+	<div class="display_course">
+		<div class="courses_list clearfix">
+			{if $data neq ""} 
+			{foreach $data as $key}
+			<div class="course">
+				<a href="index.php?controller=index&method=course&id={$key['id']}" title="" style="color: #000;">
+					<div class="course_img" style="background: url(uploads/{$key['albumPath']}) no-repeat left top;background-size: 100% 215px;">
+						
+					</div>
+					<div class="title_outer">
+						<div class="course_title omit">
+							{$key['course_name']}
+						</div>
+						<div class="course_describe">
+							<span>描述：</span>{$key['summary']}
+						</div>
+					</div>
+				</a>
+			</div>
+			{/foreach}
+			{/if}
+		</div>
+		<div class="pagenum">
+ 			{$pages}
+ 		</div>
+	</div>
+	<footer>
+		<div class="footer_main">
+			<div class="footer_top">
+ 				<ul class="clearfix">
+ 					<li><a href="" title="">关于我们</a></li>
+ 					<li><a href="" title="">联系我们</a></li>
+ 					<li><a href="" title="">帮助中心</a></li>
+ 					<li><a href="" title="">内容招募</a></li>
+ 					<li><a href="" title="">意见反馈</a></li>
+ 				</ul>
+			</div>
+			<div class="footer_bottom">
+				&copy 软件工程13-4 赵东雨
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

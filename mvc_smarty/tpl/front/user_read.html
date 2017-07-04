@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>学过的课程</title>
+	<link rel="stylesheet" type="text/css" href="style/homepage.css">
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+</head>
+<style type="text/css" media="screen">
+.one_couser{
+	margin-top: 30px;
+}
+.one_couser .study_time{
+	display: inline-block;
+	margin: 30px 0;
+	float: left;
+	width: 10%;
+	text-align: center;
+	color: rgb(46,51,63);
+}
+.continue_study{
+	height: 106px;
+	float: right;
+	width: 10%;
+	text-align: center;
+	line-height: 106px;
+	margin-right: 40px;
+}
+
+.h3_outer h3{
+	float: left;
+	margin: 20px 30px;
+	max-width: 55%;
+	line-height: 30px;
+}
+.h3_outer span{
+	display: inline-block;
+	margin-top: 40px;
+	float: left;
+}
+</style>
+<body>
+	{if $data neq ''}
+	{foreach $data as $key}
+	<div class="one_couser clearfix">
+		<span class="study_time">
+			<span class="year">{$tim['y']}</span>
+			<span class="date">{$tim['md']}</span></span>
+		<div class="couser_ed">
+			<div class="article_info">
+				<div class="h3_outer">
+					<h3>{$key['article_name']}</h3>
+					<span>—— {$key['author']}</span>
+				</div>
+				<div class="continue_study">
+					<a href="index.php?controller=index&method=read&id={$key['articleid']}&uid={$key['userid']}" target="_parent" title=""><span>查看</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="couser_delete">
+		<a href="index.php?controller=index&method=delreaded&id={$key['id']}&uid={$key['userid']}" title=""></a>
+		</div>
+	</div>	
+	{/foreach}
+	{/if}	
+</body>
+</html>

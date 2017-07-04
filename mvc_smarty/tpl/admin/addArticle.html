@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>添加文章</title>
+ 	<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script type="text/javascript" charset="utf-8" src="plugins/kindeditor/kindeditor.js"></script>
+	<script type="text/javascript" charset="utf-8" src="plugins/kindeditor/lang/zh_CN.js"></script>
+ 	<script type="text/javascript">
+	 	KindEditor.ready(function(K) {
+	        window.editor = K.create('#editor_id');
+	    });
+ 	</script>
+	<style type="text/css" media="screen">
+		body{
+			margin: 0 20px;
+		}
+
+		h3{
+			color: red;
+			font-size: 24px;
+		}
+		input{
+			height: 28px;
+ 			width: 250px;
+		}
+		select{
+			height: 35px;
+			width: 100px;
+		}
+	</style>
+ </head>
+ <body>
+ 	<h3 class="h3">添加文章</h3>
+ 	<form action="admin.php?controller=admin&method=addArticle" method="post" enctype="multipart/form-data">
+ 		<table width="70%" border="1" cellpadding="5" cellspacing="0" bgcolor="#ccc">
+
+ 			<tr><td align="right">文章标题</td><td><input type="text" name="article_name" required="required" value="{$data[0]['article_name']|default:''}"placeholder="请输入文章标题"></td></tr>
+
+ 			<tr><td align="right">作者</td><td><input type="text" name="author" required="required" value="{$data[0]['author']|default:''}" placeholder="请输入课程名称"></td></tr>
+ 			<tr>
+ 				<td align="right">所属分类</td>
+ 				<td>
+					<select name="cid">
+						{foreach $info as $row}
+						<option value="{$row['id']}" {if $data[0]['cid'] eq $row['id']} selected='selected' {else} null {/if}>{$row['cate_name']}</option>
+						{/foreach}
+					</select>
+ 				</td>
+ 			</tr>
+ 			<tr>
+ 			    <td align="right">内容</td>
+ 			    <td><textarea name="content" id="editor_id" style="width: 98%;height: 300px;">{$data[0]['content']|default:''}</textarea></td>
+ 			</tr>
+ 			<tr align="center">
+ 				<input type="hidden" name="id" value="{$data[0]['id']|default:''}">
+ 			    <td colspan="2"><input type="submit" name="" value="提交" class="btn"></td>
+ 			</tr>
+ 		</table>
+ 	</form>
+ </body>
+ </html>
