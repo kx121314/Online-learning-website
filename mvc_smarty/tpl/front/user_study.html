@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>学过的课程</title>
+	<link rel="stylesheet" type="text/css" href="style/homepage.css">
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+</head>
+<body>
+	{if $data neq ''}
+	{foreach $data as $key}
+	<div class="one_couser clearfix">
+		<span class="study_time">
+			<span class="year">{$tim['y']}</span>
+			<span class="date">{$tim['md']}</span></span>
+		<div class="couser_ed">
+			<img src="uploads/{$key['albumPath']}" alt="">
+			<div class="couser_info">
+				<div class="h3_outer">
+					<h3><a href="" title="">{$key['course_name']}</a></h3>
+					<p>学习至：{$key['part_name']}</p>
+				</div>
+				<div class="continue_study">
+					<a href="index.php?controller=index&method=study_video&id={$key['partid']}&uid={$key['userid']}" target="_parent" title=""><span>继续学习</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="couser_delete">
+		<a href="index.php?controller=index&method=dellearned&id={$key['id']}&uid={$key['userid']}" title=""></a>
+		</div>
+	</div>
+	{/foreach}
+	{/if}	
+</body>
+</html>

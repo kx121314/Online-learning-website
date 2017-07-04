@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>课程</title>
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+	<link rel="stylesheet" type="text/css" href="style/index.css">
+	<link rel="stylesheet" type="text/css" href="style/course.css">
+</head>
+<body>
+	<header id="index_header">
+		<h2><a href="index.php" title="">在线学习网</a></h2>
+		<nav>
+			<ul class="clearfix">
+				<li><a href="index.php?controller=index&method=course_list" title="">课程</a></li>
+				<li><a href="index.php?controller=index&method=article_list" title="">文章</a></li>
+				<li><a href="" title=""></a></li>
+			</ul>
+		</nav>
+		<div class="nav_right">
+			<div class="inputout">
+			<form action="index.php?controller=index&method=searchAll" method="post" accept-charset="utf-8">
+				<input type="search" name="search" value="" placeholder="搜索全站">
+				<span><input type="submit" name="" value=""></span>
+			</form>
+			</div>
+			<span><a href="index.php?controller=index&method=homepage&id={$userId}" title="">{$userName}</a></span><a href="index.php?controller=index&method=logout" title="">退出</a>
+		</div>
+	</header><!-- /header -->
+	<div class="course_main">
+		<div class="course_header">
+			<div class="in_auto">
+				<h1>{$cour[0]['course_name']}</h1>
+				<div class="author">
+					作者：<a href="" title="">{$cour[0]['course_author']}</a>
+				</div>
+				<div class="cou_score">
+					<span>难易度:</span><span class="c_score">{$cour[0]['score']}</span>
+				</div>
+				<div class="study_state">
+				{if $learned neq ''}
+					<span><a href="index.php?controller=index&method=study_video&id={$learned[0]['partid']}&uid={$userId}" title="">继续学习</a></span>
+				{else}
+					<span><a href="index.php?controller=index&method=study_video&id={$parts_i[0]['id']}&uid={$userId}" title="">开始学习</a></span>
+				{/if}
+				
+				</div>
+			</div>
+			
+		</div>
+		<div class="course_content clearfix">
+			<div class="cou_content_l">
+				<div class="cou_outer clearfix">
+					<div class="cou_summary">
+						<span class="summary">简介：</span><span>{$cour[0]['summary']}</span>
+					</div>
+					<div class="cou_menu">
+						<ul class="clearfix">
+							<li><a href="" title="">章节</a></li>
+							<!-- <li><a href="" title="">评论</a></li>
+							<li><a href="" title="">问答</a></li> -->
+						</ul>
+					</div>
+				</div>
+
+
+				{if $data neq ''}
+				{foreach $data as $key}
+				<div class="cou_outer clearfix">
+					<h4>{$key['chapter_name']}</h4>
+					<div class="chapter">
+						<ul>
+						{foreach $parts_i as $part_i}
+						{if $part_i['chid'] eq $key['id']}
+							<li><a href="index.php?controller=index&method=study_video&id={$part_i['id']}&uid={$userId}" title="">{$part_i['part_name']}</a></li>
+						{/if}
+						{/foreach}
+						</ul>
+					</div>
+				</div>
+				{/foreach}
+				{/if}
+			</div>
+			<div class="cou_content_r">
+				<div class="cou_ready">
+					<h4>课程须知</h4>
+						{$cour[0]['ready']}
+				</div>
+				<div class="cou_ready">
+					<h4>告诉你能学到什么？</h4>
+						{$cour[0]['pDes']}
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="footer_main">
+			<div class="footer_top">
+ 				<ul class="clearfix">
+ 					<li><a href="" title="">关于我们</a></li>
+ 					<li><a href="" title="">联系我们</a></li>
+ 					<li><a href="" title="">帮助中心</a></li>
+ 					<li><a href="" title="">内容招募</a></li>
+ 					<li><a href="" title="">意见反馈</a></li>
+ 				</ul>
+			</div>
+			<div class="footer_bottom">
+				&copy 软件工程13-4 赵东雨
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

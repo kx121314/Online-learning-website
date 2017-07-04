@@ -1,0 +1,153 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+	<link rel="stylesheet" type="text/css" href="style/index.css">
+	
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<header id="index_header">
+		<h2><a href="" title="">在线学习网</a></h2>
+		<nav>
+			<ul class="clearfix">
+				<li><a href="index.php?controller=index&method=course_list" title="">课程</a></li>
+				<li><a href="index.php?controller=index&method=article_list" title="">文章</a></li>
+				<li><a href="" title=""></a></li>
+			</ul>
+		</nav>
+		<div class="nav_right">
+			<div class="inputout">
+			<form action="index.php?controller=index&method=searchAll" method="post" accept-charset="utf-8">
+				<input type="search" name="search" value="" placeholder="搜索全站">
+				<span><input type="submit" name="" value=""></span>
+			</form>
+			</div>
+			
+			{if $userName neq ''}
+			<span><a href="index.php?controller=index&method=homepage&id={$userId}" title="">{$userName}</a></span><a href="index.php?controller=index&method=logout" title="">退出</a>
+			{else}
+			<span><a href="index.php?controller=index&method=login" title="">登录/注册</a></span>
+			{/if}
+		</div>
+	</header><!-- /header -->
+	<div class="main">
+		<div class="head_cont clearfix">	
+			<div class="menu" id="menu">
+				<ul class="menu_ul">
+					{foreach $bigcate as $onecate}
+					<li><a href="" title=""><span class="menu_title">{$onecate['cate_name']}</span></a>
+						<div class="menu_side">
+							<div class="menu_outer">
+								<div class="menu_top">
+									<h3>分类目录</h3>
+									<div class="menu_details clearfix">
+										<div class="mince">
+										{foreach $smallcate as $soc}
+											{if $soc['cid'] eq $onecate['id']}
+											<a target="_blank" href="index.php?controller=index&method=course_list&cate={$onecate['id']}&id={$soc['id']}"> {$soc['cate_name']} </a>
+											<span>/</span>
+											{/if}
+										{/foreach}
+										</div>
+									</div>
+
+								</div>
+								<div class="menu_bottom">
+									<h3>课程推荐</h3>
+									<ul>
+										{foreach $commend as $comone}
+										{if $comone['cid'] eq $onecate['id']}
+										<li><a href="index.php?controller=index&method=course&id={$comone['id']}" title="">{$comone['course_name']}</a></li>
+										{/if}
+										{/foreach}
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+					</li>
+					{/foreach}
+					
+				</ul>
+			</div>
+
+
+			<div class="imgsturn_outer" id="imgsturn_outer">
+				<div class="imgsturn">
+					<ul>
+						<li style="z-index: 10;"><a href="index.php?controller=index&method=course&id=20" title=""><img src="img/1.jpg"></a></li>
+						<li><a href="index.php?controller=index&method=course&id=30" title=""><img src="img/2.jpg"></a></li>
+						<li><a href="index.php?controller=index&method=course&id=22" title=""><img src="img/3.jpg"></a></li>
+						<li><a href="index.php?controller=index&method=course&id=23" title=""><img src="img/4.jpg"></a></li>
+						<li><a href="index.php?controller=index&method=course&id=25" title=""><img src="img/5.jpg"></a></li>
+					</ul>
+					<ol>
+						<li>1</li><li>2</li><li>3</li><li>4</li><li>5</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<div class="subnav clearfix">
+				<div class="subnav_son">
+					<ul>
+						<li><a href=""><span style="background: url(img/icon/subnav_1.png) no-repeat 15% center;">Web前端</span></a></li>
+						<li><a href=""><span style="background: url(img/icon/subnav_2.png) no-repeat 15% center;">PHP攻城狮</span></a></li>
+						<li><a href=""><span style="background: url(img/icon/subnav_3.png) no-repeat 15% center;">Android</span></a></li>
+						<li><a href=""><span style="background: url(img/icon/subnav_4.png) no-repeat 15% center;">java攻城狮</span></a></li>
+						<li><a href=""><span style="background: url(img/icon/subnav_5.png) no-repeat 15% center;">IOS攻城狮</span></a></li>
+					</ul>
+				</div>
+		</div>
+		
+		<div class="detailed_course">
+			<div class="detailed_course_title clearfix">
+				<h3>最近更新</h3>
+				<span class="more"><a href="" title="">更多 ></a></span>
+			</div>
+			<div class="courses_list clearfix">
+
+				{foreach $Tencourse as $course}
+				
+				<div class="course">
+					<a target="_blank" href="index.php?controller=index&method=course&id={$course['id']}" title="" style="color: #000;">
+						<div class="course_img" style="background: url(uploads/{$course['albumPath']}) no-repeat left top;background-size: 100% 215px;">
+							
+						</div>
+						<div class="title_outer">
+							<div class="course_title omit">
+								{$course['cate_name']}&nbsp;||&nbsp;{$course['course_name']}
+							</div>
+							<div class="course_describe">
+								<span>描述：</span>{$course['summary']}
+							</div>
+						</div>
+					</a>
+				</div>
+			
+				{/foreach}
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="footer_main">
+			<div class="footer_top">
+ 				<ul class="clearfix">
+ 					<li><a href="" title="">关于我们</a></li>
+ 					<li><a href="" title="">联系我们</a></li>
+ 					<li><a href="" title="">帮助中心</a></li>
+ 					<li><a href="" title="">内容招募</a></li>
+ 					<li><a href="" title="">意见反馈</a></li>
+ 				</ul>
+			</div>
+			<div class="footer_bottom">
+				&copy 软件工程13-4 赵东雨
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

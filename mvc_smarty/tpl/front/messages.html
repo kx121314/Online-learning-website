@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+	<link rel="stylesheet" type="text/css" href="style/index.css">
+	<link rel="stylesheet" type="text/css" href="style/course.css">
+	<link rel="stylesheet" type="text/css" href="style/study_video.css">
+</head>
+<body style="background: #fff;">
+
+	<div id="showmes">
+		{if $mess neq ''}
+		{foreach $mess as $key}
+		<div class="cou_outer clearfix">
+			<div class="user_header">
+
+			</div>
+			<div class="comment_content">
+				<h5>{$key['username']}</h5>
+				<span class="content">{$key['content']}</span>
+				<span class="pub_time">时间：{$key['pubtime']|date_format:'%Y-%m-%d'}</span>
+				<span class="good">123</span>
+			</div>
+		</div>
+		{/foreach}
+		<div class="pagenum">
+ 			{$pages}
+ 		</div>
+		{/if}
+	</div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>课程分类</title>
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+	<link rel="stylesheet" type="text/css" href="style/index.css">
+	<link rel="stylesheet" type="text/css" href="style/course_list.css">
+	<script type="text/javascript">
+	//a会跳转，这样设置不行
+		// $(document).ready(function(){
+		// 	for (var i = 0; i < $('.one_classification').length; i++) {
+		// 		var $dii=$('.one_classification').eq(i).find('li');
+		// 		for (var j = 0; j < $dii.length; j++) {
+		// 			$dii.eq(j).click(function(){
+		// 				$(this).addClass('active');
+		// 			})
+		// 		}
+		// 	}
+		// })
+		window.onload=function(){
+			var cate=getUrlParam('cate');
+			if (cate) {
+				var aa=document.getElementById(cate);
+				addClass(aa,"active");
+			}else{
+				var aa=document.getElementById('0');
+				addClass(aa,"active");
+			}
+
+			var id=getUrlParam('id');
+			if (id) {
+				var bb=document.getElementById(id);
+				addClass(bb,"active");
+			}else{
+				var bb=document.getElementById('00');
+				addClass(bb,"active");
+			}
+			
+			
+
+		}
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		} 
+		function hasClass(ele, cls) {
+		  cls = cls || '';
+		  if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
+		  return new RegExp(' ' + cls + ' ').test(' ' + ele.className + ' ');
+		}
+		 
+		function addClass(ele, cls) {
+		  if (!hasClass(ele, cls)) {
+		    ele.className = ele.className == '' ? cls : ele.className + ' ' + cls;
+		  }
+		}
+		 
+		function removeClass(ele, cls) {
+		  if (hasClass(ele, cls)) {
+		    var newClass = ' ' + ele.className.replace(/[\t\r\n]/g, '') + ' ';
+		    while (newClass.indexOf(' ' + cls + ' ') >= 0) {
+		      newClass = newClass.replace(' ' + cls + ' ', ' ');
+		    }
+		    ele.className = newClass.replace(/^\s+|\s+$/g, '');
+		  }
+		}
+
+	</script>
+</head>
+<body>
+	<header id="index_header">
+		<h2><a href="index.php" title="">在线学习网</a></h2>
+		<nav>
+			<ul class="clearfix">
+				<li><a href="index.php?controller=index&method=course_list" title="" class="active">课程</a></li>
+				<li><a href="index.php?controller=index&method=article_list" title="">文章</a></li>
+				<li><a href="" title=""></a></li>
+			</ul>
+		</nav>
+		<div class="nav_right">
+			<div class="inputout">
+			<form action="index.php?controller=index&method=searchAll" method="post" accept-charset="utf-8">
+				<input type="search" name="search" value="" placeholder="搜索全站">
+				<span><input type="submit" name="" value=""></span>
+			</form>
+			</div>
+			{if $userName neq ''}
+			<span><a href="index.php?controller=index&method=homepage&id={$userId}" title="">{$userName}</a></span><a href="index.php?controller=index&method=logout" title="">退出</a>
+			{else}
+			<span><a href="index.php?controller=index&method=login" title="">登录/注册</a></span>
+			{/if}
+		</div>
+	</header><!-- /header -->
+	<div class="course_classify">
+		<div class="classify_auto">
+			<div class="one_classification clearfix">
+				<span class="ul_tltle">分类：</span>
+				<ul>
+					<li id="0"><a href="index.php?controller=index&method=course_list" title="">全部</a></li>
+					{foreach $bigcate as $onecate}
+					<li  id="{$onecate['id']}"><a href="index.php?controller=index&method=course_list&cate={$onecate['id']}" title="">{$onecate['cate_name']}</a></li>
+					{/foreach}
+				</ul>
+			</div>
+			<div class="one_classification clearfix">
+				<span class="ul_tltle"></span>
+				<ul>
+					<li id="00"><a href="index.php?controller=index&method=course_list&cate={$catebycid[0]['cid']}" title="">全部</a></li>
+					{if $catebycid neq ""} 
+					{foreach $catebycid as $smallcate}
+					<li id="{$smallcate['id']}"><a href="index.php?controller=index&method=course_list&cate={$smallcate['cid']}&id={$smallcate['id']}" title="">{$smallcate['cate_name']}</a></li>
+					{/foreach}
+					{/if}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="display_course">
+		<div class="courses_list clearfix">
+			{if $data neq ""} 
+			{foreach $data as $key}
+			<div class="course">
+				<a href="index.php?controller=index&method=course&id={$key['id']}" title="" style="color: #000;">
+					<div class="course_img" style="background: url(uploads/{$key['albumPath']}) no-repeat left top;background-size: 100% 215px;">
+						
+					</div>
+					<div class="title_outer">
+						<div class="course_title omit">
+							{$key['course_name']}
+						</div>
+						<div class="course_describe">
+							<span>描述：</span>{$key['summary']}
+						</div>
+					</div>
+				</a>
+			</div>
+			{/foreach}
+			{/if}
+		</div>
+		<div class="pagenum">
+ 			{$pages}
+ 		</div>
+	</div>
+	<footer>
+		<div class="footer_main">
+			<div class="footer_top">
+ 				<ul class="clearfix">
+ 					<li><a href="" title="">关于我们</a></li>
+ 					<li><a href="" title="">联系我们</a></li>
+ 					<li><a href="" title="">帮助中心</a></li>
+ 					<li><a href="" title="">内容招募</a></li>
+ 					<li><a href="" title="">意见反馈</a></li>
+ 				</ul>
+			</div>
+			<div class="footer_bottom">
+				&copy 软件工程13-4 赵东雨
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
